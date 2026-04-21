@@ -1,31 +1,48 @@
 <!doctype html>
 <html>
   <head>
-    <title>LA TV Shows | Home</title>
-    <meta name="description" content="A Catalog of Shows Set in Los Angeles" />
+    <title>Movies Choices | Home</title>
+    <meta name="description" content="A Catalog of Movies" />
     <link rel="stylesheet" href="style.css" />
     <script type="text/javascript" src="scripts.js"></script>
   </head>
 
   <body>
     <header class="main-header">
-      <h1 class="title">LA TV Shows</h1>
+      <h1 class="title">Movies Catalog 🍿 🎥</h1>
     </header>
-    <div id="card-container"></div>
-    <div class="card" style="display: none">
+
+    <div id="movie-container"></div>
+
+    <div class="card template-card" style="display: none;">
       <div class="card-content">
-        <h2>TV Show Title</h2>
-        <img src="" alt="TV Show Poster" />
-        <ul>
-          <li>Bullet Point 1</li>
-          <li>Bullet Point 2</li>
-          <li>Bullet Point 3</li>
-        </ul>
+        <h2 class="movie-title"></h2>
+        <p><strong>Genre:</strong> <span class="movie-genre"></span></p>
+        <p><strong>Rating:</strong> <span class="movie-rating"></span></p>
+        <p><strong>Year:</strong> <span class="movie-year"></span></p>
       </div>
     </div>
-    <div class="footer">
-      <button onclick="quoteAlert()">Get A Quote!</button>
-      <button onclick="removeLastCard()">Remove A Card!</button>
-    </div>
+
+    <footer class="footer">
+      <div class="footer-group">
+        <button onclick="SearchByTitle()">Search by Title</button>
+        <input type="text" id="search-input" placeholder="Search by title..." />
+      </div>
+
+      <div class="footer-group">
+        <button onclick="filterByGenre()">Filter by Genre</button>
+        <select id="genre-select">
+          <option value="">Choose genre</option>
+          <option value="action">Action</option>
+          <option value="drama">Drama</option>
+          <option value="comedy">Comedy</option>
+          <option value="romance">Romance</option>
+        </select>
+      </div>
+
+      <div class="footer-group">
+        <button onclick="SortByYear()">Sort by Year</button>
+      </div>
+    </footer>
   </body>
 </html>
