@@ -1,97 +1,114 @@
-/**
- * Data Catalog Project Starter Code - SEA Stage 2
- *
- * This file is where you should be doing most of your work. You should
- * also make changes to the HTML and CSS files, but we want you to prioritize
- * demonstrating your understanding of data structures, and you'll do that
- * with the JavaScript code you write in this file.
- *
- * The comments in this file are only to help you learn how the starter code
- * works. The instructions for the project are in the README. That said, here
- * are the three things you should do first to learn about the starter code:
- * - 1 - Change something small in index.html or style.css, then reload your
- *    browser and make sure you can see that change.
- * - 2 - On your browser, right click anywhere on the page and select
- *    "Inspect" to open the browser developer tools. Then, go to the "console"
- *    tab in the new window that opened up. This console is where you will see
- *    JavaScript errors and logs, which is extremely helpful for debugging.
- *    (These instructions assume you're using Chrome, opening developer tools
- *    may be different on other browsers. We suggest using Chrome.)
- * - 3 - Add another string to the titles array a few lines down. Reload your
- *    browser and observe what happens. You should see a fourth "card" appear
- *    with the string you added to the array, but a broken image.
- *
- */
-
-const FRESH_PRINCE_URL =
-  "https://upload.wikimedia.org/wikipedia/en/3/33/Fresh_Prince_S1_DVD.jpg";
-const CURB_POSTER_URL =
-  "https://m.media-amazon.com/images/M/MV5BZDY1ZGM4OGItMWMyNS00MDAyLWE2Y2MtZTFhMTU0MGI5ZDFlXkEyXkFqcGdeQXVyMDc5ODIzMw@@._V1_FMjpg_UX1000_.jpg";
-const EAST_LOS_HIGH_POSTER_URL =
-  "https://static.wikia.nocookie.net/hulu/images/6/64/East_Los_High.jpg";
-
-// This is an array of strings (TV show titles)
-let titles = [
-  "Fresh Prince of Bel Air",
-  "Curb Your Enthusiasm",
-  "East Los High",
+// This is an array of objects (movie data) // changing this to movie titles, genre, rating, year
+let movies = [ 
+ { title: "The Accountant", genre: "action", rating: 4.9, year: 2016 }, 
+ { title: "The Dark Knight", genre: "action", rating: 4.8, year: 2008 },
+ { title: "Good Will Hunting", genre: "drama", rating: 4.7, year: 1997 },
+ { title: "The Shawshank Redemption", genre: "drama", rating: 4.9, year: 1994 },
+  { title: "The Hangover", genre: "comedy", rating: 4.3, year: 2009 },
+  {title: "Me before You", genre: "romance", rating: 4.1, year: 2016 },
+  {title: "The Notebook", genre: "romance", rating: 4.2, year: 2004 },
+  {title: "Superbad", genre: "comedy", rating: 4.0, year: 2007 },
+  {title: "Inception", genre: "action", rating: 4.8, year: 2010 },
+  {title: "The Godfather", genre: "drama", rating: 4.9, year: 1972 },
+  {title: "Year One", genre: "comedy", rating: 3.5, year: 2009 },
+  {title: "The Fault in Our Stars", genre: "romance", rating: 4.0, year: 2014 },
+  
 ];
-// Your final submission should have much more data than this, and
-// you should use more than just an array of strings to store it all.
 
-// This function adds cards the page to display the data in the array
-function showCards() {
-  const cardContainer = document.getElementById("card-container");
-  cardContainer.innerHTML = "";
-  const templateCard = document.querySelector(".card");
 
-  for (let i = 0; i < titles.length; i++) {
-    let title = titles[i];
 
-    // This part of the code doesn't scale very well! After you add your
-    // own data, you'll need to do something totally different here.
-    let imageURL = "";
-    if (i == 0) {
-      imageURL = FRESH_PRINCE_URL;
-    } else if (i == 1) {
-      imageURL = CURB_POSTER_URL;
-    } else if (i == 2) {
-      imageURL = EAST_LOS_HIGH_POSTER_URL;
-    }
 
-    const nextCard = templateCard.cloneNode(true); // Copy the template card
-    editCardContent(nextCard, title, imageURL); // Edit title and image
-    cardContainer.appendChild(nextCard); // Add new card to the container
+//I want to display the list of movies in the console, so I can
+//  see all the data for each movie. 
+// I will use a for loop to go through each movie in the array and
+//  log its title, genre, rating, 
+// and year to the console.
+
+
+function showMovies(movies) { 
+  const movieContainer = document.getElementById("movie-container"); 
+  movieContainer.innerHTML = ""; 
+  const templateCard = document.querySelector(".template-card"); 
+  for (let i = 0; i < movies.length; i++) { 
+    const movieCard = templateCard.cloneNode(true); // Clone the template card for each movie
+
+    movieCard.style.display = "block"; // Make the cloned card visible
+    movieCard.classList.remove("template-card"); // Remove the template class 
+    // from the cloned card
+    movieCard.querySelector(".movie-title").textContent = movies[i].title; 
+    movieCard.querySelector(".movie-genre").textContent = movies[i].genre; 
+    movieCard.querySelector(".movie-rating").textContent = movies[i].rating; 
+    movieCard.querySelector(".movie-year").textContent = movies[i].year; 
+    
+    
+    
+    movieContainer.appendChild(movieCard); // Add the movie card to the container
+  } 
+  
+  
   }
+
+
+
+
+// This function will be called when the page loads to 
+// display the list of movies on the webpage.
+document.addEventListener("DOMContentLoaded", function() {
+
+  showMovies(movies); // Call the function to show movies when the page loads
 }
 
-function editCardContent(card, newTitle, newImageURL) {
-  card.style.display = "block";
+);
 
-  const cardHeader = card.querySelector("h2");
-  cardHeader.textContent = newTitle;
 
-  const cardImage = card.querySelector("img");
-  cardImage.src = newImageURL;
-  cardImage.alt = newTitle + " Poster";
 
-  // You can use console.log to help you debug!
-  // View the output by right clicking on your website,
-  // select "Inspect", then click on the "Console" tab
-  console.log("new card:", newTitle, "- html: ", card);
+   
+
+function updateMovieList() { 
+  const searchInput = document.getElementById("search-input").value.toLowerCase();
+  const genreSelectValue = document.getElementById("genre-select").value;
+
+  const filteredMovies = movies.filter( 
+    
+    function(movie) { // Filter movies based on search input and selected genre
+    const matchesTitle = movie.title.toLowerCase().includes(searchInput);
+    const matchesGenre = genreSelectValue === "" || movie.genre === genreSelectValue;
+
+
+    return matchesTitle && matchesGenre;
+  }
+
+);
+
+  showMovies(filteredMovies);
 }
 
-// This calls the addCards() function when the page is first loaded
-document.addEventListener("DOMContentLoaded", showCards);
+function SearchByTitle() { 
+updateMovieList(); // Call the function to show movies 
+// based on the search input and selected genre
+}
 
-function quoteAlert() {
-  console.log("Button Clicked!");
-  alert(
-    "I guess I can kiss heaven goodbye, because it got to be a sin to look this good!",
+
+
+
+// This function will filter the movies by genre 
+// when the user selects a genre from the dropdown menu.
+
+function filterByGenre() { 
+ 
+updateMovieList(); // Call the function to show movies 
+// based on the search input and selected genre
+
+}
+
+function SortByYear() { 
+
+  const sortedMovies = [...movies].sort(
+    function(a, b) {
+      return a.year - b.year; // Sort movies by year in ascending order
+    }
   );
+
+  showMovies(sortedMovies); // Show the sorted movies on the webpage  
 }
 
-function removeLastCard() {
-  titles.pop(); // Remove last item in titles array
-  showCards(); // Call showCards again to refresh
-}
