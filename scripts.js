@@ -1,4 +1,6 @@
-// This is an array of objects (movie data) // changing this to movie titles, genre, rating, year
+
+// This is an array of objects (movie data)
+//  // changing this to movie titles, genre, rating, year
 let movies = [ 
  { title: "The Accountant", genre: "action", rating: 4.9, year: 2016 }, 
  { title: "The Dark Knight", genre: "action", rating: 4.8, year: 2008 },
@@ -12,7 +14,7 @@ let movies = [
   {title: "The Godfather", genre: "drama", rating: 4.9, year: 1972 },
   {title: "Year One", genre: "comedy", rating: 3.5, year: 2009 },
   {title: "The Fault in Our Stars", genre: "romance", rating: 4.0, year: 2014 },
-  
+
 ];
 
 
@@ -28,13 +30,14 @@ let movies = [
 function showMovies(movies) { 
   const movieContainer = document.getElementById("movie-container"); 
   movieContainer.innerHTML = ""; 
-  const templateCard = document.querySelector(".template-card"); 
+  const templateCard = document.querySelector(".template-card");
+
   for (let i = 0; i < movies.length; i++) { 
     const movieCard = templateCard.cloneNode(true); // Clone the template card for each movie
 
     movieCard.style.display = "block"; // Make the cloned card visible
     movieCard.classList.remove("template-card"); // Remove the template class 
-    // from the cloned card
+     // from the cloned card
     movieCard.querySelector(".movie-title").textContent = movies[i].title; 
     movieCard.querySelector(".movie-genre").textContent = movies[i].genre; 
     movieCard.querySelector(".movie-rating").textContent = movies[i].rating; 
@@ -103,7 +106,8 @@ updateMovieList(); // Call the function to show movies
 
 function SortByYear() { 
 
-  const sortedMovies = [...movies].sort(
+  const sortedMovies = [...movies].sort( // Create a copy of the movies array 
+  // and sort it by year
     function(a, b) {
       return a.year - b.year; // Sort movies by year in ascending order
     }
