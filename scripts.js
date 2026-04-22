@@ -2,7 +2,9 @@
 // This is an array of objects (movie data)
 //  // changing this to movie titles, genre, rating, year
 let movies = [ 
+
  { title: "The Accountant", genre: "action", rating: 4.9, year: 2016 }, 
+
  { title: "The Dark Knight", genre: "action", rating: 4.8, year: 2008 },
  { title: "Good Will Hunting", genre: "drama", rating: 4.7, year: 1997 },
  { title: "The Shawshank Redemption", genre: "drama", rating: 4.9, year: 1994 },
@@ -15,12 +17,13 @@ let movies = [
   {title: "Year One", genre: "comedy", rating: 3.5, year: 2009 },
   {title: "The Fault in Our Stars", genre: "romance", rating: 4.0, year: 2014 },
 
+
 ];
 
 
 
 
-//I want to display the list of movies in the console, so I can
+//I want to display the list of movies in the webpage, so I can
 //  see all the data for each movie. 
 // I will use a for loop to go through each movie in the array and
 //  log its title, genre, rating, 
@@ -71,11 +74,13 @@ function updateMovieList() {
   const searchInput = document.getElementById("search-input").value.toLowerCase();
   const genreSelectValue = document.getElementById("genre-select").value;
 
-  const filteredMovies = movies.filter( 
+  const filteredMovies = movies.filter(  // Use the filter method to
+  //  create a new array of movies
+  //  
     
     function(movie) { // Filter movies based on search input and selected genre
     const matchesTitle = movie.title.toLowerCase().includes(searchInput);
-    const matchesGenre = genreSelectValue === "" || movie.genre === genreSelectValue;
+    const matchesGenre = genreSelectValue === "" || movie.genre === genreSelectValue; // Check if the movie matches the selected genre or if no genre is selected
 
 
     return matchesTitle && matchesGenre;
@@ -110,7 +115,7 @@ function SortByYear() {
   // and sort it by year
     function(a, b) {
       return a.year - b.year; // Sort movies by year in ascending order
-    }
+    } // from oldest to newest
   );
 
   showMovies(sortedMovies); // Show the sorted movies on the webpage  
